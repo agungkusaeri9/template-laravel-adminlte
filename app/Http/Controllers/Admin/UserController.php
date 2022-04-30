@@ -47,7 +47,7 @@ class UserController extends Controller
         $data['password'] = bcrypt(request('password'));
         User::create($data);
 
-        return redirect()->route('admin.users.index')->with('success','User berhasil ditambahkan');
+        return redirect()->route('admin.users.index')->with('success','User berhasil disimpan.');
     }
 
     public function edit($id)
@@ -98,7 +98,7 @@ class UserController extends Controller
         }
         $item->update($data);
 
-        return redirect()->route('admin.users.index')->with('success','User berhasil disimpan');
+        return redirect()->route('admin.users.index')->with('success','User berhasil disimpan.');
     }
 
     public function destroy($id)
@@ -106,7 +106,7 @@ class UserController extends Controller
         $item = User::findOrFail($id);
         Storage::disk('public')->delete($item->avatar);
         $item->delete();
-        return redirect()->route('admin.users.index')->with('success','User berhasil dihapus');
+        return redirect()->route('admin.users.index')->with('success','User berhasil dihapus.');
     }
 
 }

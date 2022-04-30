@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link text-center">
-      <span class="brand-text font-weight-bold">My App</span>
+    <a href="{{ route('home') }}" class="brand-link text-center">
+      <span class="brand-text font-weight-bold">{{ env('APP_NAME','My App') }}</span>
     </a>
 
     <!-- Sidebar -->

@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/login', 301);
-
 Auth::routes();
+
+Route::get('/', function(){
+    return view('welcome');
+})->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {

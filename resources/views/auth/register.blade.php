@@ -4,14 +4,17 @@
 @endsection
 @section('content')
 <div class="register-box">
-    <div class="register-logo">
-      <a href="#">Register</a>
-    </div>
-  
+    <div class="login-logo">
+        <a href="{{ route('home') }}">
+         <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="" class="img-fluid">
+         <h1 class="text-center pt-3 pb-2">My App</h1>
+        </a>
+     </div>
+
     <div class="card">
       <div class="card-body register-card-body">
         <p class="login-box-msg">Register a new membership</p>
-  
+
         <form action="{{ route('register') }}" method="post">
             @csrf
           <div class="input-group mb-3">
@@ -95,7 +98,7 @@
             <!-- /.col -->
           </div>
         </form>
-  
+
         <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
       </div>
       <!-- /.form-box -->

@@ -54,7 +54,7 @@
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $item->name ?? old('name') }}">
                         @error('name')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -63,7 +63,7 @@
                         <label for="username">Username</label>
                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" value="{{ $item->username ?? old('username') }}">
                         @error('username')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -72,7 +72,7 @@
                         <label for="email">Email</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ $item->email ?? old('email') }}">
                         @error('email')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -81,7 +81,7 @@
                         <label for="password">Password</label>
                         <input type="text" name="password" class="form-control @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}">
                         @error('password')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -97,7 +97,7 @@
                             <label class="form-check-label" for="user">User</label>
                         </div>
                         @error('role')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -106,7 +106,7 @@
                         <label for="avatar">Avatar</label>
                         <input type="file" name="avatar" class="form-control @error('avatar') is-invalid @enderror" id="avatar" value="{{ old('avatar') }}">
                         @error('avatar')
-                            <div class="is-invalid">
+                            <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -128,9 +128,9 @@
 @endsection
 @push('styles')
 <!-- Toastr -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.css') }}">
 @endpush
 @push('scripts')
-<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
-@include('admin.layouts.partials.toast')
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+@include('admin.layouts.partials.sweetalert')
 @endpush

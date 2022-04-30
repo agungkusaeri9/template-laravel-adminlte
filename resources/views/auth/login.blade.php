@@ -3,17 +3,20 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-      <a href="#">Login</a>
+       <a href="{{ route('home') }}">
+        <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="" class="img-fluid">
+        <h1 class="text-center pt-3 pb-2">My App</h1>
+       </a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-  
+
         <form action="{{ route('login') }}" method="post">
             @csrf
           <div class="input-group mb-3">
-            <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username" value="{{ old('username') }}"> 
+            <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username" value="{{ old('username') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -55,7 +58,7 @@
           </div>
         </form>
         <!-- /.social-auth-links -->
-  
+
         <p class="mb-0">
           <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
         </p>

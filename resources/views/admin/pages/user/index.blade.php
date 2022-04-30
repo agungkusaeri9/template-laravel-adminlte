@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h6>Data User</h6>
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">Add User</a>
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">Tambah User</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,11 +38,11 @@
                                         Akun Anda
                                     </div>
                                     @else
-                                    <a href="{{ route('admin.users.edit',$item->id) }}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('admin.users.destroy',$item->id) }}" method="post" class="d-inline">
+                                    <a href="{{ route('admin.users.edit',$item->id) }}" class="btn btn-sm btn-info" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <form method="post" class="d-inline" id="formDelete">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fas fa-trash"></i></button>
+                                        <button title="Hapus" class="btn btn-sm btn-danger btnDelete" data-action="{{ route('admin.users.destroy',$item->id) }}"><i class="fas fa-trash"></i></button>
                                     </form>
                                     @endif
                                 </td>
@@ -61,31 +61,27 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-<!-- Toastr -->
-<link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
+
+<link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
 @endpush
 @push('scripts')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
-@include('admin.layouts.partials.toast')
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+@include('admin.layouts.partials.sweetalert')
 <script>
     $(function () {
-      $('#table').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        columnDefs: [
-            { orderable: false, targets: 0 },
-            { orderable: false, targets: 6 },
-        ],
-      });
+        $('#table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": true
+        });
     });
 </script>
 @endpush
