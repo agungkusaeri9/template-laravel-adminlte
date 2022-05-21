@@ -66,18 +66,12 @@
                             <div class="form-group row">
                                 <label for="role" class="col-md-2 col-form-label">Role</label><br>
                                 <div class="col-md-10">
+                                    @foreach ($roles as $role)
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('role') is-invalid @enderror" type="radio"
-                                            name="role" id="admin" value="admin"
-                                            @if ($item->role === 'admin') checked @endif>
-                                        <label class="form-check-label" for="admin">Admin</label>
+                                        <input @if($role->name == $item->getRoleNames()->first()) checked @endif class="form-check-input @error('role') is-invalid @enderror" type="radio" name="role" id="{{ $role->name }}" value="{{ $role->name }}">
+                                        <label class="form-check-label" for="{{ $role->name }}">{{ $role->name }}</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('role') is-invalid @enderror" type="radio"
-                                            name="role" id="user" value="user"
-                                            @if ($item->role === 'user') checked @endif>
-                                        <label class="form-check-label" for="user">User</label>
-                                    </div>
+                                    @endforeach
                                     @error('role')
                                         <div class="invalid-feedback">
                                             {{ $message }}

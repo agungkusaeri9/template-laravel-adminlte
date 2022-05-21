@@ -7,12 +7,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $items = User::orderBy('role','ASC')->get();
+        $items = User::orderBy('name','ASC')->get();
         return view('admin.pages.user.index',[
             'title' => 'Data User',
             'items' => $items
@@ -21,8 +22,10 @@ class UserController extends Controller
 
     public function create()
     {
+        $roles = Role::get();
         return view('admin.pages.user.create',[
-            'title' => 'Tambah User'
+            'title' => 'Tambah User',
+            'roles' => $roles
         ]);
     }
 
@@ -33,11 +36,10 @@ class UserController extends Controller
             'username' => ['required','alpha_dash','min:3','unique:users,username'],
             'email' => ['required','email','unique:users,email'],
             'password' => ['required','min:5'],
-            'avatar' => ['image','mimes:jpg,jpeg,png'],
-            'role' => ['required','in:admin,user']
+            'avatar' => ['image','mimes:jpg,jpeg,png']
         ]);
 
-        $data = request()->all();
+        $data = request()->except('role');
         if(request()->file('avatar'))
         {
             $data['avatar'] = request()->file('avatar')->store('user','public');
@@ -45,7 +47,9 @@ class UserController extends Controller
             $data['avatar'] = NULL;
         }
         $data['password'] = bcrypt(request('password'));
-        User::create($data);
+        $user = User::create($data);
+
+        $user->assignRole(request('role'));
 
         return redirect()->route('admin.users.index')->with('success','User berhasil disimpan.');
     }
@@ -56,10 +60,12 @@ class UserController extends Controller
         {
             return redirect()->route('admin.users.index');
         }
+        $roles = Role::get();
         $item = User::findOrFail($id);
         return view('admin.pages.user.edit',[
             'title' => 'Edit User',
-            'item' => $item
+            'item' => $item,
+            'roles' => $roles
         ]);
     }
 
@@ -73,12 +79,11 @@ class UserController extends Controller
             'name' => ['required','string','min:3'],
             'username' => ['required','alpha_dash','min:3',Rule::unique('users','username')->ignore($id)],
             'email' => ['required','email',Rule::unique('users','email')->ignore($id)],
-            'avatar' => ['image','mimes:jpg,jpeg,png'],
-            'role' => ['required','in:admin,user']
+            'avatar' => ['image','mimes:jpg,jpeg,png']
         ]);
 
         $item = User::findOrFail($id);
-        $data = request()->all();
+        $data = request()->except('role');
         if(request()->file('avatar'))
         {
             Storage::disk('public')->delete($item->avatar);
@@ -97,6 +102,7 @@ class UserController extends Controller
             $data['password'] = $item->password;
         }
         $item->update($data);
+        $item->syncRoles(request('role'));
 
         return redirect()->route('admin.users.index')->with('success','User berhasil disimpan.');
     }

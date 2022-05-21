@@ -1,16 +1,13 @@
 @extends('admin.layouts.app')
 @section('content')
-@can('user-view')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h6>Data User</h6>
-                        @can('user-create')
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">Tambah User</a>
-                        @endcan
+                        <h6>Data Permission</h6>
+                        <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-sm">Tambah Permission</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -18,39 +15,23 @@
                         <thead>
                             <tr>
                                 <th  style="width:20px">No</th>
-                                <th>Avatar</th>
-                                <th>Name</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                @canany(['user-edit','user-delete'])
-                                <th class="text-center" style="width:80px">Aksi</th>
-                                @endcanany
+                                <th>Nama Permission</th>
+                                <th style="width:80px;text-align:center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($items as $item)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td><img src="{{ $item->avatar() }}" alt="" class="img-fluid" style="height: 80px;width:80px"></td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->username }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->getRoleNames()->first() }}</td>
-                                @canany(['user-edit','user-delete'])
                                 <td class="text-center">
-                                    @can('user-edit')
-                                    <a href="{{ route('admin.users.edit',$item->id) }}" class="btn btn-sm btn-info" title="Edit"><i class="fas fa-edit"></i></a>
-                                    @endcan
-                                    @can('user-delete')
+                                    <a href="{{ route('admin.permissions.edit',$item->id) }}" class="btn btn-sm btn-info" title="Edit"><i class="fas fa-edit"></i></a>
                                     <form method="post" class="d-inline" id="formDelete">
                                         @csrf
                                         @method('delete')
-                                        <button title="Hapus" class="btn btn-sm btn-danger btnDelete" data-action="{{ route('admin.users.destroy',$item->id) }}"><i class="fas fa-trash"></i></button>
+                                        <button title="Hapus" class="btn btn-sm btn-danger btnDelete" data-action="{{ route('admin.permissions.destroy',$item->id) }}"><i class="fas fa-trash"></i></button>
                                     </form>
-                                    @endcan
                                 </td>
-                                @endcanany
                             </tr>
                             @endforeach
                         </tbody>
@@ -60,7 +41,6 @@
         </div>
     </div>
 </div>
-@endcan
 @endsection
 @push('styles')
 <!-- DataTables -->

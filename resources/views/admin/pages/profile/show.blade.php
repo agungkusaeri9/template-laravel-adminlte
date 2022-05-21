@@ -87,22 +87,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="role">Role</label><br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('role') is-invalid @enderror" type="radio" name="role" id="admin" value="admin" @if($item->role === 'admin') checked @endif>
-                            <label class="form-check-label" for="admin">Admin</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('role') is-invalid @enderror" type="radio" name="role" id="user" value="user" @if($item->role === 'user') checked @endif>
-                            <label class="form-check-label" for="user">User</label>
-                        </div>
-                        @error('role')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="avatar">Avatar</label>
                         <input type="file" name="avatar" class="form-control @error('avatar') is-invalid @enderror" id="avatar" value="{{ old('avatar') }}">
                         @error('avatar')

@@ -26,8 +26,7 @@ class ProfileController extends Controller
             'name' => ['required','string','min:3'],
             'username' => ['required','alpha_dash','min:3',Rule::unique('users','username')->ignore($item->id)],
             'email' => ['required','email',Rule::unique('users','email')->ignore($item->id)],
-            'avatar' => ['image','mimes:jpg,jpeg,png'],
-            'role' => ['required','in:admin,user']
+            'avatar' => ['image','mimes:jpg,jpeg,png']
         ]);
 
         $data = request()->all();

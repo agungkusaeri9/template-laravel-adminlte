@@ -12,12 +12,22 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $superadmin = User::create([
+            'name' => 'Super Admin',
+            'username' => 'superadmin',
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('superadmin')
+        ]);
+
+        $superadmin->assignRole('super admin');
+
+        $admin = User::create([
             'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
-            'role' => 'admin'
+            'password' => bcrypt('admin')
         ]);
+
+        $admin->assignRole('admin');
     }
 }
