@@ -51,7 +51,11 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $permissions = Permission::whereNotIn('id',$role->permissions->pluck('id'))->get();
+        $permissions = Permission::whereNotIn('id',$role->permissions->pluck('id'))->orderBy('name','ASC')->get();
+        if($role->name === 'super admin')
+        {
+           return redirect()->route('admin.roles.index');
+        }
         return view('admin.pages.role.permission',[
             'title' => 'Role Permission',
             'role' => $role,

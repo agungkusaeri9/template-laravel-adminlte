@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DashboardController extends Controller
 {
@@ -17,7 +19,8 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $count = [
-            'user' => User::count()
+            'user' => User::count(),
+            'role' => Role::count()
         ];
         return view('admin.pages.dashboard',[
             'title' => 'Dashboard',

@@ -41,11 +41,11 @@ Route::middleware(['auth'])->group(function () {
         // roles
         Route::prefix('roles')->group(function(){
             Route::get('/','RoleController@index')->name('roles.index')->middleware('can:role-view');
-            Route::get('/create','RoleController@create')->name('roles.create')->middleware('can:role-view');
-            Route::post('/create','RoleController@store')->name('roles.store')->middleware('can:role-view');
-            Route::get('/{id}/edit','RoleController@edit')->name('roles.edit')->middleware('can:role-view');
-            Route::patch('/{id}/edit','RoleController@update')->name('roles.update');
-            Route::delete('/{id}/delete','RoleController@destroy')->name('roles.destroy')->middleware('can:role-view');
+            Route::get('/create','RoleController@create')->name('roles.create')->middleware('can:role-create');
+            Route::post('/create','RoleController@store')->name('roles.store')->middleware('can:role-create');
+            Route::get('/{id}/edit','RoleController@edit')->name('roles.edit')->middleware('can:role-edit');
+            Route::patch('/{id}/edit','RoleController@update')->name('roles.update')->middleware('can:role-edit');
+            Route::delete('/{id}/delete','RoleController@destroy')->name('roles.destroy')->middleware('can:role-delete');
 
             // role permissions
             Route::get('/{id}','RoleController@show')->name('roles.show')->middleware('can:rolepermission-view');
@@ -56,11 +56,11 @@ Route::middleware(['auth'])->group(function () {
         // permissions
         Route::prefix('permissions')->group(function(){
             Route::get('/','PermissionController@index')->name('permissions.index')->middleware('can:permission-view');
-            Route::get('/create','PermissionController@create')->name('permissions.create')->middleware('can:permission-view');
-            Route::post('/create','PermissionController@store')->name('permissions.store')->middleware('can:permission-view');
-            Route::get('/{id}/edit','PermissionController@edit')->name('permissions.edit')->middleware('can:permission-view');
-            Route::patch('/{id}/edit','PermissionController@update')->name('permissions.update')->middleware('can:permission-view');
-            Route::delete('/{id}/delete','PermissionController@destroy')->name('permissions.destroy')->middleware('can:permission-view');
+            Route::get('/create','PermissionController@create')->name('permissions.create')->middleware('can:permission-create');
+            Route::post('/create','PermissionController@store')->name('permissions.store')->middleware('can:permission-create');
+            Route::get('/{id}/edit','PermissionController@edit')->name('permissions.edit')->middleware('can:permission-edit');
+            Route::patch('/{id}/edit','PermissionController@update')->name('permissions.update')->middleware('can:permission-edit');
+            Route::delete('/{id}/delete','PermissionController@destroy')->name('permissions.destroy')->middleware('can:permission-delete');
         });
 
     });

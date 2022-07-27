@@ -12,7 +12,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $items = Permission::latest()->get();
+        $items = Permission::orderBy('name','ASC')->get();
         return view('admin.pages.permission.index',[
             'title' => 'Data Permission',
             'items' => $items

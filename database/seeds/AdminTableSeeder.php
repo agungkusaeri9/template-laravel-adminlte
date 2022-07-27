@@ -20,14 +20,5 @@ class AdminTableSeeder extends Seeder
         ]);
 
         $superadmin->assignRole('super admin');
-
-        $admin = User::create([
-            'name' => 'Admin',
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin')
-        ]);
-
-        $admin->assignRole('admin');
     }
 }

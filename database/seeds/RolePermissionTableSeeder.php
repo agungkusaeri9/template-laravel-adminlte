@@ -15,8 +15,5 @@ class RolePermissionTableSeeder extends Seeder
         Role::create([
             'name' => 'super admin'
         ]);
-        Role::create([
-            'name' => 'admin'
-        ]);
     }
 }

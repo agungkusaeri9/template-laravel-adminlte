@@ -28,6 +28,7 @@
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
+                                @if ($item->name !== 'super admin')
                                 @canany(['role-edit', 'role-delete', 'rolepermission-view'])
                                 <td class="text-center">
                                     @can('rolepermission-view')
@@ -45,6 +46,11 @@
                                     @endcan
                                 </td>
                                 @endcanany
+                                @else
+                                <td class="small font-italic text-center">
+                                    Tidak Diizinkan
+                                </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
