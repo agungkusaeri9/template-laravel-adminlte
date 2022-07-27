@@ -63,5 +63,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}/delete','PermissionController@destroy')->name('permissions.destroy')->middleware('can:permission-delete');
         });
 
+        // post-categories
+        Route::prefix('post-categories')->group(function(){
+            Route::get('/','PostCategoryController@index')->name('post-categories.index')->middleware('can:post-category-view');
+            Route::get('/create','PostCategoryController@create')->name('post-categories.create')->middleware('can:post-category-create');
+            Route::post('/create','PostCategoryController@store')->name('post-categories.store')->middleware('can:post-category-create');
+            Route::get('/{id}/edit','PostCategoryController@edit')->name('post-categories.edit')->middleware('can:post-category-edit');
+            Route::patch('/{id}/edit','PostCategoryController@update')->name('post-categories.update')->middleware('can:post-category-edit');
+            Route::delete('/{id}/delete','PostCategoryController@destroy')->name('post-categories.destroy')->middleware('can:post-category-delete');
+        });
+
     });
 });

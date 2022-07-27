@@ -5,16 +5,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="text-center">Edit Permission</h6>
+                    <h6 class="text-center">Tambah Kategori</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.permissions.update',$item->id) }}" method="post">
+                    <form action="{{ route('admin.post-categories.store') }}" method="post">
                         @csrf
-                        @method('patch')
                         <div class="form-group row">
-                            <label for="name" class="col-md-2 col-form-label">Name</label>
+                            <label for="name" class="col-md-2 col-form-label">Nama Kategori</label>
                             <div class="col-md-10">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $item->name ?? old('name') }}">
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}">
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -23,7 +22,7 @@
                             </div>
                         </div>
                         <div class="form-group d-flex justify-content-between">
-                            <a href="{{ route('admin.permissions.index') }}" class="btn btn-warning">Batal</a>
+                            <a href="{{ route('admin.post-categories.index') }}" class="btn btn-warning">Batal</a>
                             <button class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

@@ -31,6 +31,18 @@
                         </a>
                     </li>
                 @endcan
+                <li class="nav-header">DATA ARTIKEL</li>
+                @can('post-category-view')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.post-categories.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Kategori
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
                 <li class="nav-header">DATA MASTER</li>
                 @can('user-view')
                     <li class="nav-item">
