@@ -73,5 +73,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}/delete','PostCategoryController@destroy')->name('post-categories.destroy')->middleware('can:post-category-delete');
         });
 
+         // posts
+         Route::prefix('posts')->group(function(){
+            Route::get('/','PostController@index')->name('posts.index')->middleware('can:post-view');
+            Route::get('/create','PostController@create')->name('posts.create')->middleware('can:post-create');
+            Route::post('/create','PostController@store')->name('posts.store')->middleware('can:post-create');
+            Route::get('/{id}/edit','PostController@edit')->name('posts.edit')->middleware('can:post-edit');
+            Route::patch('/{id}/edit','PostController@update')->name('posts.update')->middleware('can:post-edit');
+            Route::delete('/{id}/delete','PostController@destroy')->name('posts.destroy')->middleware('can:post-delete');
+        });
+
     });
 });

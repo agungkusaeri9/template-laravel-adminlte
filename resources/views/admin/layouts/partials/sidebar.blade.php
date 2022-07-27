@@ -18,7 +18,8 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 @can('dashboard')
@@ -38,6 +39,16 @@
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Kategori
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('post-view')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.posts.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Artikel
                             </p>
                         </a>
                     </li>
@@ -75,7 +86,8 @@
                     </li>
                 @endcan
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" title="Logout" class="nav-link" onclick="event.preventDefault();
+                    <a href="{{ route('logout') }}" title="Logout" class="nav-link"
+                        onclick="event.preventDefault();
             document.getElementById('formLogout').submit();">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
